@@ -27,3 +27,13 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scope>
+.vux-demo {
+  text-align: center;
+}
+.logo {
+  width: 100px;
+  height: 100px
+}
+</style>
