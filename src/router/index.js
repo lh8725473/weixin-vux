@@ -3,14 +3,21 @@ import Router from 'vue-router'
 import Publish from '@/view/Publish'
 import Task from '@/view/Task'
 import User from '@/view/User'
+import UserInfo from '@/view/UserInfo'
 import UserOrderList from '@/view/UserOrderList'
 import UserTaskList from '@/view/UserTaskList'
+import Login from '@/view/Login'
 
 Vue.use(Router)
 
 export default new Router({
   base: __dirname,
   routes: [
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
     {
       path: '/publish',
       name: 'Publish',
@@ -26,13 +33,14 @@ export default new Router({
       name: 'User',
       component: User,
       children: [
+        { path: 'info', name: 'UserInfo', component: UserInfo },
         { path: 'order-list', name: 'UserOrderList', component: UserOrderList },
-        { path: 'task-list', component: UserTaskList }
+        { path: 'task-list', name: 'UserTaskList', component: UserTaskList }
       ]
     },
     {
       path: '*',
-      redirect: '/publish'
+      redirect: '/task'
     }
   ]
 })

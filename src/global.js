@@ -1,0 +1,1 @@
+global.COURSES = 'xxxxx'

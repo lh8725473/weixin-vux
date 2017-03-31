@@ -1,21 +1,24 @@
 <template>
   <div class="user">
-    <h2>
-    	<router-link to="user/order-list">/parent/foo</router-link>
-    </h2>
-    <transition :name="transitionName">
-	    <router-view class="child-view"></router-view>
+    <transition name="fade" mode="out-in">
+	    <router-view></router-view>
 	  </transition>
   </div>
 </template>
 
 <script>
 
+import { Cell, Group } from 'vux'
+
 export default {
 	data () {
     return {
       transitionName: 'slide-left'
     }
+  },
+  components: {
+    Cell,
+    Group
   }
 }
 </script>

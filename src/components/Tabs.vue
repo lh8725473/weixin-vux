@@ -9,7 +9,7 @@
         <img slot="icon" src="../assets/logo.png">
         <span slot="label">Message</span>
       </tabbar-item>
-      <tabbar-item selected link="/user">
+      <tabbar-item selected link="/user/info">
         <img slot="icon" src="../assets/logo.png">
         <span slot="label">Explore</span>
       </tabbar-item>
