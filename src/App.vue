@@ -1,14 +1,17 @@
 <template>
-  <div id="app">
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
+  <div id="app" class="full-height">
+    
+     <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
+    
   </div>
 	
 </template>
 
 <script>
 import Tabs from './components/Tabs'
+import { ViewBox } from 'vux'
 
 export default {
   name: 'app',
@@ -41,16 +44,28 @@ export default {
     }
   },
   components: {
-    Tabs
+    Tabs,
+    ViewBox
   }
 }
 </script>
 
 <style lang="less">
 @import '~vux/src/styles/reset.less';
+@import '~nprogress/nprogress.css';
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
 
 body {
   background-color: #fbf9fe;
+}
+
+.full-height{
+  height: 100%;
 }
 
 .fade-enter-active, .fade-leave-active {

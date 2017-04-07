@@ -36,7 +36,7 @@ export default {
         password: this.password
       }
       var that = this
-      this.$http.post('http://localhost:3000/users/login', params)
+      this.$http.post('/users/login', params)
         .then(function (res) {
           if(res.success){
             cookie.set('token', res.token, {
@@ -44,6 +44,8 @@ export default {
             })
             router.push('/publish')
           }else {
+            console.log('_______________')
+            console.log(res)
             that.$vux.toast.show({
               text: res.message,
               type: 'warn',
@@ -54,6 +56,12 @@ export default {
           
         })
         .catch(function (error) {
+          console.log('reject')
+          that.$vux.toast.show({
+            text: error.message,
+            type: 'warn',
+            position: 'top'
+          })
           
         })
     }

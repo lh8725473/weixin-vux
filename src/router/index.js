@@ -7,6 +7,7 @@ import UserInfo from '@/view/UserInfo'
 import UserOrderList from '@/view/UserOrderList'
 import UserTaskList from '@/view/UserTaskList'
 import Login from '@/view/Login'
+import SignUp from '@/view/SignUp'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/sign-up',
+      name: 'SignUp',
+      component: SignUp
     },
     {
       path: '/publish',
