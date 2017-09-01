@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Publish from '@/view/Publish'
 import Task from '@/view/Task'
 import User from '@/view/User'
 import UserInfo from '@/view/UserInfo'
@@ -9,11 +8,19 @@ import UserTaskList from '@/view/UserTaskList'
 import Login from '@/view/Login'
 import SignUp from '@/view/SignUp'
 
+const Home = () => import('@/view/Home')
+const Publish = () => import('@/view/Publish')
+
 Vue.use(Router)
 
 export default new Router({
   base: __dirname,
   routes: [
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
+    },
     {
       path: '/login',
       name: 'Login',
@@ -46,7 +53,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: '/task'
+      redirect: '/home'
     }
   ]
 })

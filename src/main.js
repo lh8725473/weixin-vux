@@ -3,11 +3,17 @@
 import Vue from 'vue'
 import FastClick from 'fastclick'
 import router from './router/index.js'
+import * as filters from './filters' // 全局vue filter
 import App from './App'
 import axios from 'axios'
 import NProgress from 'nprogress'
+import infiniteScroll from 'vue-infinite-scroll'
+import './assets/icon-font/iconfont.css'
+
+
 import { cookie, AjaxPlugin, AlertPlugin, ToastPlugin } from 'vux'
 
+Vue.use(infiniteScroll)
 Vue.use(AjaxPlugin)
 Vue.use(AlertPlugin)
 Vue.use(ToastPlugin)
@@ -20,6 +26,11 @@ router.beforeEach((to, from, next) => {
   // console.log(from)
   NProgress.start()
   next()
+})
+
+// 注册全局过滤器
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
 })
 
 router.afterEach(transition => {

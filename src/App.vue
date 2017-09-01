@@ -1,12 +1,12 @@
 <template>
-  <div id="app" class="full-height">
-    
+  <div id="app" class="full-height" :class="{'no-tabs': showTabs}">
+
      <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>
-    
+
   </div>
-	
+
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
     // 因为当钩子执行前，组件实例还没被创建
     next(vm => {
       // 通过 `vm` 访问组件实例
-      if(to.name === 'UserInfo' || to.name === 'Publish' || to.name === 'Task'){
+      if(to.name === 'Home' || to.name === 'UserInfo'|| to.name === 'Task'){
         vm.showTabs = true
       }else {
         vm.showTabs = false
@@ -36,7 +36,7 @@ export default {
   // dynamically set transition based on route change
   watch: {
     '$route' (to, from) {
-      if(to.name === 'UserInfo' || to.name === 'Publish' || to.name === 'Task'){
+      if(to.name === 'Home' || to.name === 'UserInfo' || to.name === 'Task'){
         this.showTabs = true
       }else {
         this.showTabs = false
@@ -87,5 +87,12 @@ body {
   opacity: 0;
   -webkit-transform: translate(-30px, 0);
   transform: translate(-30px, 0);
+}
+.no-tabs{
+  .weui-tab{
+    .weui-tab__panel{
+      padding-bottom: 0;
+    }
+  }
 }
 </style>

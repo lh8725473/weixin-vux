@@ -1,6 +1,10 @@
 <template>
   <div>
     <tabbar>
+      <tabbar-item link="/home">
+        <i slot="icon" class="icon wechart-icon icon-check"></i>
+        <span slot="label">Home</span>
+      </tabbar-item>
       <tabbar-item link="/publish">
         <img slot="icon" src="../assets/logo.png">
         <span slot="label">Wechat</span>
@@ -24,6 +28,12 @@ export default {
   components: {
     Tabbar,
     TabbarItem
+  },
+  watch: {
+    '$route' (to, from) {
+      console.log(to)
+      console.log(from)
+    }
   }
 }
 </script>

@@ -6,9 +6,8 @@
       </p>
       <load-more :tip="'正在加载'" v-show="busy && moreData"></load-more>
     </div>
-    <!--<Tabs></Tabs>-->
+    <Tabs></Tabs>
   </view-box>
-
 
 </template>
 
