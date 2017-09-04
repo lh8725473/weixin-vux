@@ -1,9 +1,10 @@
 <template>
   <div id="app" class="full-height" :class="{'no-tabs': showTabs}">
 
-     <transition name="fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
+    <Tabs></Tabs>
 
   </div>
 

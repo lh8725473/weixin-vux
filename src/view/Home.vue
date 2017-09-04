@@ -1,12 +1,13 @@
 <template>
   <view-box ref="viewBox">
-    <div class="infinite-scroll-div" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-      <p v-for="data in dataList">
-        <a :href="'#' + data" :name="data">{{data}}</a>
-      </p>
-      <load-more :tip="'正在加载'" v-show="busy && moreData"></load-more>
-    </div>
-    <Tabs></Tabs>
+    <div>home</div>
+    <!--<div class="infinite-scroll-div" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">-->
+      <!--<p v-for="data in dataList">-->
+        <!--<a :href="'#' + data" :name="data">{{data}}</a>-->
+      <!--</p>-->
+      <!--<load-more :tip="'正在加载'" v-show="busy && moreData"></load-more>-->
+    <!--</div>-->
+
   </view-box>
 
 </template>

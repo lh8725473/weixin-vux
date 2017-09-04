@@ -1,21 +1,21 @@
 <template>
   <div>
     <tabbar>
-      <tabbar-item link="/home">
+      <tabbar-item :selected="route.path === '/home'" link="/home">
         <i slot="icon" class="icon wechart-icon icon-check"></i>
         <span slot="label">Home</span>
       </tabbar-item>
-      <tabbar-item link="/publish">
+      <tabbar-item :selected="route.path === '/publish'" link="/publish">
         <img slot="icon" src="../assets/logo.png">
-        <span slot="label">Wechat</span>
+        <span slot="label">Publish</span>
       </tabbar-item>
-      <tabbar-item link="/task">
+      <tabbar-item :selected="route.path === '/task'" link="/task">
         <img slot="icon" src="../assets/logo.png">
-        <span slot="label">Message</span>
+        <span slot="label">Task</span>
       </tabbar-item>
-      <tabbar-item selected link="/user/info">
+      <tabbar-item :selected="route.path === '/user/info'" link="/user/info">
         <img slot="icon" src="../assets/logo.png">
-        <span slot="label">Explore</span>
+        <span slot="label">User</span>
       </tabbar-item>
     </tabbar>
   </div>
@@ -23,11 +23,17 @@
 
 <script>
 import { Tabbar, TabbarItem } from 'vux'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
     Tabbar,
     TabbarItem
+  },
+  computed: {
+    ...mapState({
+      route: state => state.route
+    })
   },
   watch: {
     '$route' (to, from) {

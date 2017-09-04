@@ -2,8 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import FastClick from 'fastclick'
+import { sync } from 'vuex-router-sync'
 import router from './router/index.js'
 import * as filters from './filters' // 全局vue filter
+import store from './store/store.js' // 全局vue vuex
 import App from './App'
 import axios from 'axios'
 import NProgress from 'nprogress'
@@ -36,6 +38,9 @@ Object.keys(filters).forEach(key => {
 router.afterEach(transition => {
   NProgress.done()
 })
+
+// 同步router变量
+sync(store, router)
 
 axios.defaults.baseURL = 'http://localhost:3000/'
 // Add a request interceptor
@@ -76,5 +81,6 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app-box')
