@@ -1,11 +1,9 @@
 <template>
   <div id="app" class="full-height" :class="{'no-tabs': showTabs}">
-
     <transition :name="transitionName" mode="out-in">
-      <router-view class="child-view"></router-view>
+      <router-view></router-view>
     </transition>
     <Tabs v-show="showTabs"></Tabs>
-
   </div>
 
 </template>
