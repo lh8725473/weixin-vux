@@ -13,7 +13,7 @@
         <img slot="icon" src="../assets/logo.png">
         <span slot="label">Task</span>
       </tabbar-item>
-      <tabbar-item :selected="route.path === '/user/info'" link="/user/info">
+      <tabbar-item :selected="route.path === '/user/info'" link="/user">
         <img slot="icon" src="../assets/logo.png">
         <span slot="label">User</span>
       </tabbar-item>
@@ -34,12 +34,6 @@ export default {
     ...mapState({
       route: state => state.route
     })
-  },
-  watch: {
-    '$route' (to, from) {
-      console.log(to)
-      console.log(from)
-    }
   }
 }
 </script>

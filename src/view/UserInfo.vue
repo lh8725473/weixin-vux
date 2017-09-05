@@ -40,10 +40,10 @@ import { Cell, Group } from 'vux'
 
 export default {
   created () {
-    this.$http.get('http://localhost:3000/users/user-list?limit=3&page=1&keyword=abcd')
-      .then(function (response) {
-        console.log(response)
-      })
+//    this.$http.get('http://localhost:3000/users/user-list?limit=3&page=1&keyword=abcd')
+//      .then(function (response) {
+//        console.log(response)
+//      })
   },
   data () {
     return {

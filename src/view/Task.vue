@@ -29,18 +29,6 @@ export default {
       limit: that.limit,
       page: that.page
     }
-    this.$http.get('/user-address/list', {params})
-      .then(function (response) {
-        console.log(response)
-        that.$nextTick(function () {
-          that.addressList = _.concat(that.addressList, response.data)
-          that.$refs.scroller.reset()
-          setTimeout(() => {
-            that.$refs.scroller.donePullup()
-          })
-        })
-        
-      })
   },
   components: {
     ViewBox,
@@ -122,5 +110,5 @@ export default {
 }
 .box2 p{
   height: 80px;
-}  
+}
 </style>

@@ -43,10 +43,9 @@ export default new Router({
     },
     {
       path: '/user',
-      name: 'User',
       component: User,
       children: [
-        { path: 'info', name: 'UserInfo', component: UserInfo },
+        { path: '', name: 'UserInfo', component: UserInfo },
         { path: 'order-list', name: 'UserOrderList', component: UserOrderList },
         { path: 'task-list', name: 'UserTaskList', component: UserTaskList }
       ]

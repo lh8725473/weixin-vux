@@ -14,7 +14,7 @@
 
     </scroller>
     </div>
-    
+
   </div>
 </template>
 
@@ -29,10 +29,10 @@
         page: that.page
       }
       console.log(params)
-      this.$http.get('/user-address/list', {params})
-        .then(function (response) {
-          that.addressList = response.data
-        })
+//      this.$http.get('/user-address/list', {params})
+//        .then(function (response) {
+//          that.addressList = response.data
+//        })
     },
     data () {
       return {
@@ -54,26 +54,6 @@
           limit: this.limit,
           page: this.page
         }
-        this.$http.get('/user-address/list', {params})
-          .then(function (response) {
-            setTimeout(function (argument) {
-              that.$nextTick(function () {
-                that.addressList = _.concat(that.addressList, response.data)
-                that.$refs.scroller.reset()
-                setTimeout(() => {
-                  that.$refs.scroller.donePullup()
-                }, 100)
-              })
-            },1000)
-          })
-
-
-  //      setTimeout(() => {
-  //        this.n += 10
-  //        setTimeout(() => {
-  //          this.$refs.scroller.donePullup()
-  //        }, 10)
-  //      }, 2000)
       }
     },
     components: {
@@ -95,5 +75,5 @@
 }
 .box2 p{
   height: 80px;
-}  
+}
 </style>

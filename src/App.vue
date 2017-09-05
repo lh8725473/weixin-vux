@@ -1,24 +1,29 @@
 <template>
   <div id="app" class="full-height" :class="{'no-tabs': showTabs}">
 
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
+    <transition :name="transitionName" mode="out-in">
+      <router-view class="child-view"></router-view>
     </transition>
-    <Tabs></Tabs>
+    <Tabs v-show="showTabs"></Tabs>
 
   </div>
 
 </template>
 
 <script>
+
+import _ from 'lodash'
 import Tabs from './components/Tabs'
 import { ViewBox } from 'vux'
+
+const baseRouter = ['Home', 'Publish', 'Task', 'UserInfo']
 
 export default {
   name: 'app',
   data () {
     return {
-      showTabs: true
+      showTabs: true,
+      transitionName: 'fade'
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -27,20 +32,28 @@ export default {
     // 因为当钩子执行前，组件实例还没被创建
     next(vm => {
       // 通过 `vm` 访问组件实例
-      if(to.name === 'Home' || to.name === 'UserInfo'|| to.name === 'Task'){
+      if(_.indexOf(baseRouter, to.name) > -1){
         vm.showTabs = true
       }else {
         vm.showTabs = false
       }
+      console.log('beforeRouteEnter')
+      console.log(vm.showTabs)
     })
   },
   // dynamically set transition based on route change
   watch: {
     '$route' (to, from) {
-      if(to.name === 'Home' || to.name === 'UserInfo' || to.name === 'Task'){
+      if(_.indexOf(baseRouter, to.name) > -1){
         this.showTabs = true
       }else {
         this.showTabs = false
+      }
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      if(_.indexOf(baseRouter, to.name) > -1 && _.indexOf(baseRouter, from.name)> -1){
+        this.transitionName = 'fade'
       }
     }
   },
@@ -76,18 +89,17 @@ body {
   opacity: 0
 }
 .child-view {
-  position: absolute;
-  transition: all .5s cubic-bezier(.55,0,.1,1);
+  transition: all .5s cubic-bezier(0,0,.1,1);
 }
 .slide-left-enter, .slide-right-leave-active {
   opacity: 0;
-  -webkit-transform: translate(30px, 0);
-  transform: translate(30px, 0);
+  -webkit-transform: translate(100px, 0);
+  transform: translate(100px, 0);
 }
 .slide-left-leave-active, .slide-right-enter {
   opacity: 0;
-  -webkit-transform: translate(-30px, 0);
-  transform: translate(-30px, 0);
+  -webkit-transform: translate(-100px, 0);
+  transform: translate(-100px, 0);
 }
 .no-tabs{
   .weui-tab{
