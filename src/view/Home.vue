@@ -1,13 +1,29 @@
 <template>
   <view-box ref="viewBox">
-    <div>home</div>
-    <!--<div class="infinite-scroll-div" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">-->
-      <!--<p v-for="data in dataList">-->
-        <!--<a :href="'#' + data" :name="data">{{data}}</a>-->
-      <!--</p>-->
-      <!--<load-more :tip="'正在加载'" v-show="busy && moreData"></load-more>-->
-    <!--</div>-->
-
+    <search
+      @result-click="resultClick"
+      @on-change="getResult"
+      :results="results"
+      v-model="value"
+      position="absolute"
+      auto-scroll-to-top top="10px"
+      @on-focus="onFocus"
+      @on-cancel="onCancel"
+      @on-submit="onSubmit"
+      ref="search"></search>
+    <swiper loop auto :list="swiper_List" :index="swiperIndex" @on-index-change="onIndexChange"></swiper>
+    <div class="menu-type">
+      <grid :rows="5">
+        <grid-item :label="'Grid'" v-for="i in 5" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+      <grid :rows="5">
+        <grid-item :label="'Grid'" v-for="i in 5" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+    </div>
   </view-box>
 
 </template>
@@ -15,7 +31,27 @@
 <script>
 
 import Tabs from '@/components/Tabs'
-import { ViewBox, LoadMore} from 'vux'
+import { ViewBox, Search, Swiper, Grid, GridItem, LoadMore} from 'vux'
+
+const baseList = [{
+  url: 'javascript:',
+  img: 'https://static.vux.li/demo/1.jpg',
+  title: '送你一朵fua'
+}, {
+  url: 'javascript:',
+  img: 'https://static.vux.li/demo/2.jpg',
+  title: '送你一辆车'
+}, {
+  url: 'javascript:',
+  img: 'https://static.vux.li/demo/3.jpg',
+  title: '送你一次旅行'
+}]
+
+const urlList = baseList.map((item, index) => ({
+  url: 'http://m.baidu.com',
+  img: item.img,
+  title: `(可点击)${item.title}`
+}))
 
 export default {
   created () {
@@ -26,6 +62,10 @@ export default {
   },
   data () {
     return {
+      results: [],
+      value: 'test',
+      swiperIndex: 0,
+      swiper_List: urlList,
       showMain: true,
       dataList: [2,1,2,3,4,1,2,3,4,1,2,3,4,3,4],
       moreData: true,
@@ -48,16 +88,68 @@ export default {
         }
         this.busy = false;
       }, 2000);
+    },
+    setFocus () {
+      this.$refs.search.setFocus()
+    },
+    resultClick (item) {
+      window.alert('you click the result item: ' + JSON.stringify(item))
+    },
+    getResult (val) {
+      this.results = val ? getResult(this.value) : []
+    },
+    onSubmit () {
+      this.$refs.search.setBlur()
+      this.$vux.toast.show({
+        type: 'text',
+        position: 'top',
+        text: 'on submit'
+      })
+    },
+    onFocus () {
+      console.log('on focus')
+    },
+    onCancel () {
+      console.log('on cancel')
+    },
+    onIndexChange (index) {
+      this.demo07_index = index
     }
   },
   components: {
-    Tabs,
+    Search,
     ViewBox,
+    Swiper,
+    Grid,
+    GridItem,
     LoadMore
   }
+}
+
+
+function getResult (val) {
+  let rs = []
+  for (let i = 0; i < 20; i++) {
+    rs.push({
+      title: `${val} result: ${i + 1} `,
+      other: i
+    })
+  }
+  return rs
 }
 </script>
 
 <style lang="less">
-
+  .menu-type{
+    margin-top: 5px;
+    .weui-grids:before{
+      border: none;
+    }
+    .weui-grid:before{
+      border: none;
+    }
+    .weui-grid:after{
+      border: none;
+    }
+  }
 </style>
