@@ -25,7 +25,6 @@
       </grid>
     </div>
   </view-box>
-
 </template>
 
 <script>
