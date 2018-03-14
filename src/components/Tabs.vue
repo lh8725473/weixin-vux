@@ -2,20 +2,16 @@
   <div>
     <tabbar>
       <tabbar-item :selected="route.path === '/home'" link="/home">
-        <i slot="icon" class="icon wechart-icon icon-check"></i>
-        <span slot="label">Home</span>
+        <i slot="icon" class="icon iconfont mall-shouye"></i>
+        <span slot="label">首页</span>
       </tabbar-item>
       <tabbar-item :selected="route.path === '/publish'" link="/publish">
-        <img slot="icon" src="../assets/logo.png">
-        <span slot="label">Publish</span>
+        <i slot="icon" class="icon iconfont mall-fenlei"></i>
+        <span slot="label">分类</span>
       </tabbar-item>
-      <tabbar-item :selected="route.path === '/task'" link="/task">
-        <img slot="icon" src="../assets/logo.png">
-        <span slot="label">Task</span>
-      </tabbar-item>
-      <tabbar-item :selected="route.path === '/user/info'" link="/user">
-        <img slot="icon" src="../assets/logo.png">
-        <span slot="label">User</span>
+      <tabbar-item :selected="route.path === '/user'" link="/user">
+        <i slot="icon" class="icon iconfont mall-wode"></i>
+        <span slot="label">我的</span>
       </tabbar-item>
     </tabbar>
   </div>
@@ -45,5 +41,8 @@ export default {
 .logo {
   width: 100px;
   height: 100px
+}
+.weui-tabbar__icon{
+  line-height: 27px;
 }
 </style>

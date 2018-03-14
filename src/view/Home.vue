@@ -1,36 +1,68 @@
 <template>
-  <view-box ref="viewBox">
+  <div>
     <search
       @result-click="resultClick"
       @on-change="getResult"
       :results="results"
       v-model="value"
-      position="absolute"
-      auto-scroll-to-top top="10px"
+      position="fixed"
+      
+      auto-scroll-to-top top="0"
       @on-focus="onFocus"
       @on-cancel="onCancel"
       @on-submit="onSubmit"
       ref="search"></search>
     <swiper loop auto :list="swiper_List" :index="swiperIndex" @on-index-change="onIndexChange"></swiper>
     <div class="menu-type">
-      <grid :rows="5">
-        <grid-item :label="'Grid'" v-for="i in 5" :key="i">
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
           <img slot="icon" src="../assets/logo.png">
         </grid-item>
       </grid>
-      <grid :rows="5">
-        <grid-item :label="'Grid'" v-for="i in 5" :key="i">
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
           <img slot="icon" src="../assets/logo.png">
         </grid-item>
       </grid>
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+      <grid :cols="3">
+        <grid-item :label="'Grid'" v-for="i in 3" :key="i">
+          <img slot="icon" src="../assets/logo.png">
+        </grid-item>
+      </grid>
+
     </div>
-  </view-box>
+  </div>
 </template>
 
 <script>
 
 import Tabs from '@/components/Tabs'
-import { ViewBox, Search, Swiper, Grid, GridItem, LoadMore} from 'vux'
+import {ViewBox, Search, Swiper, Grid, GridItem, LoadMore} from 'vux'
 
 const baseList = [{
   url: 'javascript:',
@@ -66,27 +98,27 @@ export default {
       swiperIndex: 0,
       swiper_List: urlList,
       showMain: true,
-      dataList: [2,1,2,3,4,1,2,3,4,1,2,3,4,3,4],
+      dataList: [2, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 3, 4],
       moreData: true,
       busy: false
     }
   },
   methods: {
-    loadMore: function() {
-      if(this.dataList.length >= 40){
+    loadMore: function () {
+      if (this.dataList.length >= 40) {
         this.busy = true
         this.moreData = false
         return
       }
       console.log('loadMore')
-      this.busy = true;
+      this.busy = true
 
       setTimeout(() => {
         for (var i = 0, j = 10; i < j; i++) {
-          this.dataList.push(i + new Date());
+          this.dataList.push(i + new Date())
         }
-        this.busy = false;
-      }, 2000);
+        this.busy = false
+      }, 2000)
     },
     setFocus () {
       this.$refs.search.setFocus()
@@ -125,10 +157,9 @@ export default {
   }
 }
 
-
 function getResult (val) {
   let rs = []
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     rs.push({
       title: `${val} result: ${i + 1} `,
       other: i
@@ -139,16 +170,26 @@ function getResult (val) {
 </script>
 
 <style lang="less">
-  .menu-type{
-    margin-top: 5px;
-    .weui-grids:before{
-      border: none;
-    }
-    .weui-grid:before{
-      border: none;
-    }
-    .weui-grid:after{
-      border: none;
-    }
-  }
+.weui-cells.vux-search_show .weui-cell:last-child{
+  margin-bottom: 100px;
+}
+.weui-cells.vux-search_show{
+  height: 100%;
+  max-height: 100% !important;
+}
+.vux-search-box{
+  bottom: 53px;
+}
+  // .menu-type{
+  //   margin-top: 5px;
+  //   .weui-grids:before{
+  //     border: none;
+  //   }
+  //   .weui-grid:before{
+  //     border: none;
+  //   }
+  //   .weui-grid:after{
+  //     border: none;
+  //   }
+  // }
 </style>

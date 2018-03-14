@@ -1,18 +1,21 @@
 <template>
-  <div id="app" class="full-height" :class="{'no-tabs': showTabs}">
-    <transition :name="transitionName" mode="out-in">
-      <router-view></router-view>
-    </transition>
-    <Tabs v-show="showTabs"></Tabs>
+  <div id="app" class="full-height" :class="{'no-tabs': !showTabs}">
+    <view-box ref="viewBox">
+      <transition :name="transitionName" mode="out-in">
+        <router-view></router-view>
+      </transition>
+      <Tabs v-show="showTabs" slot="bottom"></Tabs>
+    </view-box>
   </div>
 
 </template>
 
-<script>
+<script type="text/babel">
 
 import _ from 'lodash'
 import Tabs from './components/Tabs'
 import { ViewBox } from 'vux'
+import { mapState, mapActions } from 'vuex'
 
 const baseRouter = ['Home', 'Publish', 'Task', 'UserInfo']
 
@@ -20,7 +23,6 @@ export default {
   name: 'app',
   data () {
     return {
-      showTabs: true,
       transitionName: 'fade'
     }
   },
@@ -30,29 +32,20 @@ export default {
     // 因为当钩子执行前，组件实例还没被创建
     next(vm => {
       // 通过 `vm` 访问组件实例
-      if(_.indexOf(baseRouter, to.name) > -1){
+      if (_.indexOf(baseRouter, to.name) > -1) {
         vm.showTabs = true
-      }else {
+      } else {
         vm.showTabs = false
       }
-      console.log('beforeRouteEnter')
       console.log(vm.showTabs)
     })
   },
-  // dynamically set transition based on route change
-  watch: {
-    '$route' (to, from) {
-      if(_.indexOf(baseRouter, to.name) > -1){
-        this.showTabs = true
-      }else {
-        this.showTabs = false
-      }
-      const toDepth = to.path.split('/').length
-      const fromDepth = from.path.split('/').length
-      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-      if(_.indexOf(baseRouter, to.name) > -1 && _.indexOf(baseRouter, from.name)> -1){
-        this.transitionName = 'fade'
-      }
+  computed: {
+    ...mapState({
+      route: state => state.route
+    }),
+		showTabs () {
+      return _.indexOf(baseRouter, this.route.name) > -1
     }
   },
   components: {

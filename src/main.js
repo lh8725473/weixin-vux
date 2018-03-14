@@ -12,7 +12,6 @@ import NProgress from 'nprogress'
 import infiniteScroll from 'vue-infinite-scroll'
 import './assets/icon-font/iconfont.css'
 
-
 import { cookie, AjaxPlugin, AlertPlugin, ToastPlugin } from 'vux'
 
 Vue.use(infiniteScroll)
@@ -42,7 +41,7 @@ router.afterEach(transition => {
 // 同步router变量
 sync(store, router)
 
-axios.defaults.baseURL = 'http://localhost:3000/'
+// axios.defaults.baseURL = 'http://localhost:3000/'
 // Add a request interceptor
 axios.interceptors.request.use(function (request) {
   let token = cookie.get('token')
@@ -75,6 +74,18 @@ axios.interceptors.response.use(function (response) {
   }
   return Promise.reject(error)
 })
+
+// console.log(Vue.$vux)
+// Vue.$vux.alert.show({
+//   title: 'Vux is Cool',
+//   content: 'Do you agree?',
+//   onShow () {
+//     console.log('Plugin: I\'m showing')
+//   },
+//   onHide () {
+//     console.log('Plugin: I\'m hiding')
+//   }
+// })
 
 Vue.config.productionTip = false
 

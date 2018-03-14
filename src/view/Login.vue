@@ -16,6 +16,7 @@
 
 import Tabs from '@/components/Tabs'
 import router from '@/router/index.js'
+import userService from '@/api/user.js'
 import { cookie, XInput, Group, XButton, Cell } from 'vux'
 
 export default {
@@ -35,34 +36,22 @@ export default {
         username: this.username,
         password: this.password
       }
-      var that = this
-      this.$http.post('/users/login', params)
-        .then(function (res) {
-          if(res.success){
-            cookie.set('token', res.token, {
-              expires: 1
-            })
-            router.push('/publish')
-          }else {
-            console.log('_______________')
-            console.log(res)
-            that.$vux.toast.show({
-              text: res.message,
-              type: 'warn',
-              position: 'top'
-            })
-          }
-          
-          
-        })
-        .catch(function (error) {
-          console.log('reject')
-          that.$vux.toast.show({
-            text: error.message,
-            type: 'warn',
-            position: 'top'
+      userService.login(params)
+        .then(response => {
+          console.log(response)
+          cookie.set('token', response.token, {
+            expires: 1
           })
-          
+          router.push('/publish')
+        })
+        .catch(error => {
+          console.log('_______________')
+          console.log(error)
+          // this.$vux.toast.show({
+          //   text: error.message,
+          //   type: 'warn',
+          //   position: 'top'
+          // })
         })
     }
   },

@@ -70,9 +70,8 @@ export default {
                 that.$refs.scroller.donePullup()
               })
             })
-          },1000)
+          }, 1000)
         })
-
 
 //      setTimeout(() => {
 //        this.n += 10
